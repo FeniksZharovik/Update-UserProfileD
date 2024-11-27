@@ -41,11 +41,6 @@ A simple web application for managing user profiles, allowing users to log in us
 - **Login**: Access your profile using your username or email.
 - **Edit Profile**: Click the pencil icon to edit your profile information.
 
-## Screenshots
-
-![Login Page](screenshots/login.png)
-![Profile Page](screenshots/profile.png)
-
 ## License
 
 This project is licensed under the GPL 3.0 License.
