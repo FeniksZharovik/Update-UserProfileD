@@ -48,7 +48,7 @@ A simple web application for managing user profiles, allowing users to log in us
 
 ## License
 
-This project is licensed under the MIT License.
+This project is licensed under the GPL 3.0 License.
 
 ## Contributing
 
