@@ -22,7 +22,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $response = [];
     if ($conn->query($sql) === TRUE) {
         $response['success'] = true;
-        // Update session data
         $_SESSION['user'][$field] = $value;
     } else {
         $response['success'] = false;
@@ -45,51 +44,66 @@ $result = $conn->query($sql);
     <title>Informasi Akun</title>
 </head>
 <body class="bg-gradient-to-r from-indigo-500 to-purple-500 flex items-center justify-center min-h-screen">
+    <div class="absolute top-4 right-4">
+        <a href="logout.php" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">Logout</a>
+    </div>
     <div class="max-w-lg w-full bg-white rounded-xl shadow-lg overflow-hidden">
         <div class="p-6">
-            <div class="flex justify-between items-center mb-4">
-                <h2 class="text-2xl font-bold text-indigo-600">Informasi Akun Anda</h2>
-                <a href="logout.php" class="text-red-500 hover:text-red-700">Logout</a>
+            <div class="flex items-center mb-4">
+                <img src="https://img.icons8.com/ios-filled/50/000000/checked-user-male.png" alt="User Icon" class="mr-2">
+                <h2 class="text-2xl text-black">Informasi Akun Anda</h2>
             </div>
             <?php if ($result->num_rows > 0): ?>
                 <?php while($row = $result->fetch_assoc()): ?>
-                    <div class="bg-gray-100 p-4 rounded-lg mb-4">
-                        <div class="flex justify-between items-center">
-                            <div>
-                                <p class="text-lg font-semibold text-gray-800">Nama Lengkap</p>
-                                <p class="text-sm text-gray-600" data-field="nama_lengkap"><?= $row['nama_lengkap'] ?></p>
+                    <div class="bg-white p-4 rounded-lg mb-4">
+                        <div class="flex items-center mb-2">
+                            <img src="https://img.icons8.com/ios-filled/24/888888/user.png" alt="Nama Lengkap Icon" class="mr-2">
+                            <div class="flex-grow">
+                                <p class="text-sm text-gray-700">Nama Lengkap</p>
+                                <p class="text-lg font-bold text-gray-800"><?= $row['nama_lengkap'] ?></p>
+                                <p class="text-xs text-gray-500">Informasi ini harus akurat</p>
                             </div>
-                            <button class="edit-button" data-field="nama_lengkap" data-uid="<?= $row['uid'] ?>">
-                                <img src="https://img.icons8.com/ios-glyphs/30/000000/pencil.png" alt="Edit">
+                            <button class="edit-button ml-4" data-field="nama_lengkap" data-uid="<?= $row['uid'] ?>">
+                                <img src="https://img.icons8.com/ios-filled/20/1176FA/pencil.png" alt="Edit Icon">
                             </button>
                         </div>
-                        <div class="flex justify-between items-center mt-2">
-                            <div>
-                                <p class="text-lg font-semibold text-gray-800">Username</p>
-                                <p class="text-sm text-gray-600" data-field="nama_pengguna"><?= $row['nama_pengguna'] ?></p>
+                        <hr class="border-gray-300 mb-2">
+                        <div class="flex items-center mb-2">
+                            <img src="https://img.icons8.com/ios-filled/24/888888/contacts.png" alt="Username Icon" class="mr-2">
+                            <div class="flex-grow">
+                                <p class="text-sm text-gray-700">Username</p>
+                                <p class="text-lg font-bold text-gray-800"><?= $row['nama_pengguna'] ?></p>
+                                <p class="text-xs text-gray-500">Nama ini akan terlihat pembaca dan tertera sebagai editor</p>
                             </div>
-                            <button class="edit-button" data-field="nama_pengguna" data-uid="<?= $row['uid'] ?>">
-                                <img src="https://img.icons8.com/ios-glyphs/30/000000/pencil.png" alt="Edit">
+                            <button class="edit-button ml-4" data-field="nama_pengguna" data-uid="<?= $row['uid'] ?>">
+                                <img src="https://img.icons8.com/ios-filled/20/1176FA/pencil.png" alt="Edit Icon">
                             </button>
                         </div>
-                        <div class="flex justify-between items-center mt-2">
-                            <div>
-                                <p class="text-lg font-semibold text-gray-800">Posisi</p>
-                                <p class="text-sm text-gray-600" data-field="role"><?= $row['role'] ?></p>
+                        <hr class="border-gray-300 mb-2">
+                        <div class="flex items-center mb-2">
+                            <img src="https://img.icons8.com/ios-filled/24/888888/briefcase.png" alt="Posisi Icon" class="mr-2">
+                            <div class="flex-grow">
+                                <p class="text-sm text-gray-700">Posisi</p>
+                                <p class="text-lg font-bold text-gray-800"><?= $row['role'] ?></p>
+                                <p class="text-xs text-gray-500">Informasi ini tidak dapat di ubah oleh anda</p>
                             </div>
-                            <button class="edit-button" data-field="role" data-uid="<?= $row['uid'] ?>">
-                                <img src="https://img.icons8.com/ios-glyphs/30/000000/pencil.png" alt="Edit">
+                            <button class="role-button ml-4" data-field="role" data-uid="<?= $row['uid'] ?>">
+                                <img src="https://img.icons8.com/ios-filled/20/1176FA/pencil.png" alt="Edit Icon">
                             </button>
                         </div>
-                        <div class="flex justify-between items-center mt-2">
-                            <div>
-                                <p class="text-lg font-semibold text-gray-800">Info Lainnya</p>
-                                <p class="text-sm text-gray-600" data-field="kredensial"><?= $row['kredensial'] ?></p>
+                        <hr class="border-gray-300 mb-2">
+                        <div class="flex items-center mb-2">
+                            <img src="https://img.icons8.com/ios-filled/24/888888/info.png" alt="Info Lainnya Icon" class="mr-2">
+                            <div class="flex-grow">
+                                <p class="text-sm text-gray-700">Info Lainnya</p>
+                                <p class="text-lg font-bold text-gray-800"><?= $row['kredensial'] ?></p>
+                                <p class="text-xs text-gray-500">Nama ini akan terlihat pembaca dan tertera sebagai editor</p>
                             </div>
-                            <button class="edit-button" data-field="kredensial" data-uid="<?= $row['uid'] ?>">
-                                <img src="https://img.icons8.com/ios-glyphs/30/000000/pencil.png" alt="Edit">
+                            <button class="edit-button ml-4" data-field="kredensial" data-uid="<?= $row['uid'] ?>">
+                                <img src="https://img.icons8.com/ios-filled/20/1176FA/pencil.png" alt="Edit Icon">
                             </button>
                         </div>
+                        <hr class="border-gray-300">
                     </div>
                 <?php endwhile; ?>
             <?php else: ?>
@@ -108,14 +122,23 @@ $result = $conn->query($sql);
     </div>
 
     <script>
-        let currentInput, currentValue, currentField, currentUid;
+        let currentInput, currentValue, currentField, currentUid, selectedRole;
 
         document.querySelectorAll('.edit-button').forEach(button => {
             button.addEventListener('click', function() {
                 const field = this.getAttribute('data-field');
                 const uid = this.getAttribute('data-uid');
-                const valueElement = this.previousElementSibling.querySelector('p.text-sm');
+                const valueElement = this.previousElementSibling.querySelector('p.text-lg');
                 currentValue = valueElement.textContent;
+
+                if (currentInput) {
+                    if (currentInput.value === currentValue) {
+                        closeInput();
+                    } else {
+                        document.getElementById('confirmationModal').classList.remove('hidden');
+                    }
+                    return;
+                }
 
                 const input = document.createElement('input');
                 input.type = 'text';
@@ -129,17 +152,78 @@ $result = $conn->query($sql);
 
                 input.addEventListener('keydown', function(event) {
                     if (event.key === 'Enter') {
-                        document.getElementById('confirmationModal').classList.remove('hidden');
+                        if (input.value !== currentValue) {
+                            document.getElementById('confirmationModal').classList.remove('hidden');
+                        } else {
+                            closeInput();
+                        }
                     }
                 });
+
+                document.addEventListener('click', function(event) {
+                    if (!input.contains(event.target) && !button.contains(event.target)) {
+                        closeInput();
+                    }
+                }, { once: true });
             });
         });
 
+        document.querySelectorAll('.role-button').forEach(button => {
+            button.addEventListener('click', function(event) {
+                event.stopPropagation(); // Prevent closing immediately
+
+                const field = this.getAttribute('data-field');
+                const uid = this.getAttribute('data-uid');
+                const valueElement = this.previousElementSibling.querySelector('p.text-lg');
+                currentValue = valueElement.textContent;
+
+                const roleOptions = document.createElement('div');
+                roleOptions.className = 'flex flex-col mt-1 bg-gray-100 p-2 rounded shadow';
+
+                const roles = ['pembaca', 'penulis'];
+                roles.forEach(role => {
+                    const roleOption = document.createElement('p');
+                    roleOption.textContent = role;
+                    roleOption.className = 'cursor-pointer p-2 rounded hover:bg-gray-200';
+
+                    if (role === currentValue) {
+                        roleOption.classList.add('text-gray-400');
+                    } else {
+                        roleOption.classList.add('text-black');
+                        roleOption.addEventListener('click', function() {
+                            selectedRole = role;
+                            document.getElementById('confirmationModal').classList.remove('hidden');
+                        });
+                    }
+
+                    roleOptions.appendChild(roleOption);
+                });
+
+                valueElement.replaceWith(roleOptions);
+                currentInput = roleOptions;
+                currentField = field;
+                currentUid = uid;
+
+                document.addEventListener('click', function(event) {
+                    if (!roleOptions.contains(event.target) && !button.contains(event.target)) {
+                        closeInput();
+                    }
+                }, { once: true });
+            });
+        });
+
+        function closeInput() {
+            const newText = document.createElement('p');
+            newText.className = 'text-lg font-bold text-gray-800';
+            newText.textContent = currentValue;
+            currentInput.replaceWith(newText);
+            currentInput = null;
+        }
+
         document.getElementById('confirmButton').addEventListener('click', function() {
-            const newValue = currentInput.value;
+            const newValue = selectedRole || currentValue;
             document.getElementById('confirmationModal').classList.add('hidden');
 
-           
             fetch('', {
                 method: 'POST',
                 headers: {
@@ -153,7 +237,11 @@ $result = $conn->query($sql);
             }).then(response => response.json())
               .then(data => {
                   if (data.success) {
-                      currentInput.replaceWith(document.createTextNode(newValue));
+                      const newText = document.createElement('p');
+                      newText.className = 'text-lg font-bold text-gray-800';
+                      newText.textContent = newValue;
+                      currentInput.replaceWith(newText);
+                      currentInput = null;
                   } else {
                       alert('Gagal memperbarui data.');
                   }
@@ -162,7 +250,7 @@ $result = $conn->query($sql);
 
         document.getElementById('cancelButton').addEventListener('click', function() {
             document.getElementById('confirmationModal').classList.add('hidden');
-            currentInput.replaceWith(document.createTextNode(currentValue));
+            closeInput();
         });
     </script>
 </body>
