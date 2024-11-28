@@ -52,13 +52,13 @@ $result = $conn->query($sql);
                         </a>
                     </li>
                     <li class="mb-4">
-                        <a href="#" class="flex items-center text-white hover:text-indigo-200">
+                        <a href="settings.php" class="flex items-center text-white hover:text-indigo-200">
                             <img src="https://img.icons8.com/ios-filled/24/ffffff/settings.png" class="mr-2">
                             Settings
                         </a>
                     </li>
                     <li class="mb-4">
-                        <a href="#" class="flex items-center text-white hover:text-indigo-200">
+                        <a href="about.php" class="flex items-center text-white hover:text-indigo-200">
                             <img src="https://img.icons8.com/ios-filled/24/ffffff/info.png" class="mr-2">
                             About
                         </a>
