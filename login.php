@@ -13,6 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $row = $result->fetch_assoc();
         if (password_verify($password, $row['password'])) {
             $_SESSION['user'] = $row;
+            setcookie('user', json_encode($row), time() + (86400 * 30), "/"); // Simpan status login di cookie selama 30 hari
             header("Location: index.php");
         } else {
             echo "Password salah.";
